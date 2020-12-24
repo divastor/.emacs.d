@@ -1,0 +1,8 @@
+.emacs-saves
+.emacs.desktop
+.emacs.desktop.lock
+.last-package-update-day
+auto-save-list
+projectile-bookmarks.eld
+
+
