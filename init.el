@@ -10,7 +10,7 @@
 ;; Set up the visible bell
 (setq visible-bell t)
 
-(set-face-attribute 'default nil :font "Fira Code Retina" :height 280)
+(set-face-attribute 'default nil :font "Fira Code Retina" :height 180)
 
 ;; (load-theme 'wombat)
 
@@ -26,8 +26,9 @@
                          ("org" . "https://orgmode.org/elpa/")
                          ("elpa" . "https://elpa.gnu.org/packages/")))
 
-;; (unless package-archive-contents
-;;  (package-refresh-contents))
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
 
 ;; Initialize use-package on non-Linux platforms
 (unless (package-installed-p 'use-package)
@@ -153,6 +154,10 @@
 (use-package counsel-projectile
   :config (counsel-projectile-mode))
 
+(use-package magit
+  :custom
+  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+
 ;; My experiments:
 (desktop-save-mode 1)
 (use-package auto-package-update)
@@ -179,13 +184,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   (quote
-    ("e6ff132edb1bfa0645e2ba032c44ce94a3bd3c15e3929cdf6c049802cf059a2a" default)))
+   '("e6ff132edb1bfa0645e2ba032c44ce94a3bd3c15e3929cdf6c049802cf059a2a" default))
  '(global-linum-mode t)
  '(ivy-rich-mode t)
  '(package-selected-packages
-   (quote
-    (counsel-projectile projectile hydra general doom-themes helpful counsel ivy-rich which-key rainbow-delimiters swiper doom-modeline ivy command-log-mode use-package markdown-mode auto-package-update))))
+   '(magit counsel-projectile projectile hydra general doom-themes helpful counsel ivy-rich which-key rainbow-delimiters swiper doom-modeline ivy command-log-mode use-package markdown-mode auto-package-update)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
