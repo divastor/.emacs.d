@@ -177,6 +177,7 @@
       version-control t)       ; use versioned backups
 (setq auto-save-file-name-transforms
       `((".*" "~/.emacs.d/.emacs-saves/" t)))
+(setq python-shell-interpreter "python3")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
