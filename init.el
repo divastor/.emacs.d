@@ -158,16 +158,18 @@
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
+(use-package forge)
+
 ;; My experiments:
 (desktop-save-mode 1)
 (use-package auto-package-update)
 (setq auto-package-update-prompt-before-update t)
 (setq auto-package-update-interval 14)
 (auto-package-update-maybe)
-(setq-default chrome-root "/media/shared/Repos/chromium/src/")
-(add-to-list 'load-path (concat chrome-root "tools/emacs"))
-(require 'chrome-filetypes)
-(require 'gn-mode)
+;; (setq-default chrome-root "/media/shared/Repos/chromium/src/")
+;; (add-to-list 'load-path (concat chrome-root "tools/emacs"))
+;; (require 'chrome-filetypes)
+;; (require 'gn-mode)
 ;; (require 'flymake-chromium)
 (setq backup-by-copying t      ; don't clobber symlinks
       backup-directory-alist '(("." . "~/.emacs.d/.emacs-saves/"))    ; don't litter my fs tree
@@ -189,7 +191,7 @@
  '(global-linum-mode t)
  '(ivy-rich-mode t)
  '(package-selected-packages
-   '(magit counsel-projectile projectile hydra general doom-themes helpful counsel ivy-rich which-key rainbow-delimiters swiper doom-modeline ivy command-log-mode use-package markdown-mode auto-package-update)))
+   '(forge magit counsel-projectile projectile hydra general doom-themes helpful counsel ivy-rich which-key rainbow-delimiters swiper doom-modeline ivy command-log-mode use-package markdown-mode auto-package-update)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
