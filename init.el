@@ -10,7 +10,7 @@
 ;; Set up the visible bell
 (setq visible-bell t)
 
-(set-face-attribute 'default nil :font "Fira Code Retina" :height 180)
+;; (set-face-attribute 'default nil :font "Fira Code Retina" :height 180)
 
 ;; (load-theme 'wombat)
 
@@ -159,6 +159,9 @@
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
 (use-package forge)
+
+(use-package org)
+
 
 ;; My experiments:
 (desktop-save-mode 1)
