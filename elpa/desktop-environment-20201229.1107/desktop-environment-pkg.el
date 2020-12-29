@@ -1,0 +1,2 @@
+;;; Generated package description from desktop-environment.el  -*- no-byte-compile: t -*-
+(define-package "desktop-environment" "20201229.1107" "Helps you control your GNU/Linux computer" '((emacs "25.1")) :commit "9ece03e3e687ff97d79eb2a9f6cc506a932f89ca" :authors '(("Damien Cassou <damien@cassou.me>, Nicolas Petton" . "nicolas@petton.fr")) :maintainer '("Damien Cassou <damien@cassou.me>, Nicolas Petton" . "nicolas@petton.fr") :url "https://gitlab.petton.fr/DamienCassou/desktop-environment")

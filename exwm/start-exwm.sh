@@ -8,5 +8,11 @@
 # Set the screen DPI
 xrdb /home/stavros/.emacs.d/exwm/Xresources
 
+# Run the screen compositor
+compton &
+
+# Lock screen (i don't think i like this very much)
+# xss-lock -- slock &
+
 # Fire it up
-exec dbus-launch --exit-with-session emacs-snapshot -mm --debug-init
+exec dbus-launch --exit-with-session emacs-snapshot -mm --debug-init -l ~/.emacs.d/desktop.el
