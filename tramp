@@ -1,4 +1,4 @@
-;; -*- emacs-lisp -*- <20/12/29 18:58:58 /home/stavros/.emacs.d/tramp>
+;; -*- emacs-lisp -*- <20/12/31 13:06:06 /home/stavros/.emacs.d/tramp>
 ;; Tramp connection history.  Don't change this file.
 ;; Run `M-x tramp-cleanup-all-connections' instead.
 
@@ -12,15 +12,14 @@
   ("pipe-buf" 4096)
   ("remote-shell" "/bin/sh")
   ("file-exists" "test -e")
+  ("perl-file-spec" t)
+  ("perl-cwd-realpath" t)
+  ("perl" "\\perl")
   ("stat" "env QUOTING_STYLE=locale \\stat")
   ("id" "/usr/bin/id")
   ("gid-integer" 0)
-  ("tmpdir" "/sudo:root@stavros-laptop:/tmp")
-  ("uid-integer" 0)
   ("case-insensitive" nil)
-  ("bzr" nil)
-  ("git" "\\git")
-  ("hg" nil)
+  ("readlink" "\\readlink")
   ("gid-string" "root")
   ("uid-string" "root")
-  ("readlink" "\\readlink")))
+  ("uid-integer" 0)))

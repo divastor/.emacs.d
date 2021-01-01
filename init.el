@@ -85,7 +85,7 @@
 (use-package doom-modeline
   :ensure t
   :init (doom-modeline-mode 1)
-  :custom ((doom-modeline-height 15)))
+  :custom ((doom-modeline-height 32)))
 
 (use-package doom-themes
   :init (load-theme 'doom-acario-dark t))
@@ -226,7 +226,7 @@
  '(global-linum-mode t)
  '(ivy-rich-mode t)
  '(package-selected-packages
-   '(describe-number desktop-environment fancy-battery all-the-icons-ivy-setup backlight pulseaudio-control xbacklight exwm flycheck ccls company-lsp lsp-ui lsp-mode forge magit counsel-projectile projectile hydra general doom-themes helpful counsel ivy-rich which-key rainbow-delimiters swiper doom-modeline ivy command-log-mode use-package markdown-mode auto-package-update)))
+   '(iflipb describe-number desktop-environment fancy-battery all-the-icons-ivy-setup backlight pulseaudio-control xbacklight exwm flycheck ccls company-lsp lsp-ui lsp-mode forge magit counsel-projectile projectile hydra general doom-themes helpful counsel ivy-rich which-key rainbow-delimiters swiper doom-modeline ivy command-log-mode use-package markdown-mode auto-package-update)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

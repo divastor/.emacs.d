@@ -1,11 +1,9 @@
+
+(require 'iflipb)
+(setq iflipb-wrap-around t)
+
 (use-package pulseaudio-control)
 (use-package backlight)
-
-;; Set frame transparency
-(set-frame-parameter (selected-frame) 'alpha '(95 . 95))
-(add-to-list 'default-frame-alist '(alpha . (95 . 95)))
-(set-frame-parameter (selected-frame) 'fullscreen 'maximized)
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; (use-package desktop-environment
 ;;   :after exwm
@@ -24,12 +22,16 @@
   (interactive)
   ;; NOTE: You will need to update this to a valid background path!
   (start-process-shell-command
-      "feh" nil  "feh --bg-scale /usr/share/backgrounds/Raindrops_On_The_Table_by_Alex_Fazit.jpg"))
+      "feh" nil  "feh --bg-scale /home/stavros/Downloads/42337.jpg"))
+;; /usr/share/backgrounds/Raindrops_On_The_Table_by_Alex_Fazit.jpg"))
 
 (defun efs/exwm-init-hook ()
+  (exwm-workspace-switch-create 0)
+  (find-file-other-window "~/.emacs.d/desktop.el")
+  
   ;; Make workspace 1 be the one where we land at startup
   (exwm-workspace-switch-create 1)
-
+  
   ;; Open eshell by default
   ;;(eshell)
 
@@ -38,14 +40,15 @@
   
   ;; Show the time and date in modeline
   (setq display-time-day-and-date t)
-  (setq display-time-format "%a %d/%m/%y")
+  (setq display-time-format "%H:%M %a %d/%m/%y")
   (display-time-mode 1)
   ;; Also take a look at display-time-format and format-time-string
 
   ;; Launch apps that will run in the background
   (efs/run-in-background "nm-applet")
   (efs/run-in-background "pasystray")
-  (efs/run-in-background "blueman-applet"))
+  (efs/run-in-background "blueman-applet")
+  (efs/run-in-background "flameshot"))
 
 (defun efs/exwm-update-class ()
   (exwm-workspace-rename-buffer exwm-class-name))
@@ -54,24 +57,26 @@
   :config
   ;; Set the default number of workspaces
   (setq exwm-workspace-number 5)
-
-  ;; When window "class" updates, use it to set the buffer name
-  (add-hook 'exwm-update-class-hook #'efs/exwm-update-class)
-  ;; When EXWM starts up, do some extra confifuration
-  (add-hook 'exwm-init-hook #'efs/exwm-init-hook)
-  ;; Language
-  (add-hook 'text-mode-hook (lambda () (set-input-method "greek")))
-  ;; When EXWM finishes initialization, do some extra setup
-  ;; (add-hook 'exwm-init-hook #'efs/after-exwm-init)
-
-  ;; For me, xmodmap to disable key 94 (sc 86)
-  (start-process-shell-command "xmodmap" nil "xmodmap ~/.emacs.d/exwm/Xmodmap")
   
   ;; Load the system tray before exwm-init
   (require 'exwm-systemtray)
+  (setq exwm-systemtray-height 24)
   (exwm-systemtray-enable)
   
-  ;; For me, touchpad id is 16 ('xinput list') and Tapping Enabled 320 ('xinput list-props <id>')
+  ;; When EXWM starts up, do some extra confifuration
+  (add-hook 'exwm-init-hook #'efs/exwm-init-hook)
+  ;; When window "class" updates, use it to set the buffer name
+  (add-hook 'exwm-update-class-hook #'efs/exwm-update-class)
+  ;; Language
+  (set-input-method "greek")
+  (toggle-input-method)
+
+  ;; When EXWM finishes initialization, do some extra setup
+  ;; (add-hook 'exwm-init-hook #'efs/after-exwm-init)
+
+  ;; For me, xmodmap to disable key 94 (sc 86, char "<")
+  (start-process-shell-command "xmodmap" nil "xmodmap ~/.emacs.d/exwm/Xmodmap")
+  ;; For me, touchpad id is 16 (or 15) ('xinput list') and Tapping Enabled 320 ('xinput list-props <id>')
   (start-process-shell-command "xinput" nil "xinput set-prop 16 320 1") ;; Touchpad click on tap
   (start-process-shell-command "xinput" nil "xinput set-prop 16 302 1") ;; Touchpad natural scrolling
   
@@ -79,7 +84,7 @@
   (require 'exwm-randr)
   (exwm-randr-enable)
   (start-process-shell-command "xrandr" nil "xrandr --output Virtual-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal")
-  
+
   ;; Set the wallpaper after changing the resolution
   (efs/set-wallpaper)
 
@@ -116,6 +121,16 @@
 	  ([XF86MonBrightnessUp] . backlight-inc)
 	  ([XF86MonBrightnessDown] . backlight-dec)
 	  ([?\M-A] . toggle-input-method)
+	  ([M-tab] . iflipb-next-buffer)
+	  ([M-iso-lefttab] . iflipb-previous-buffer)
+	  ([?\s-l] . desktop-environment-lock-screen)
+	  ([print] . (lambda ()
+		       (interactive)
+		       (let ((path (concat "~/Documents/Screenshot-" (format-time-string "%Y-%m-%d,%H:%M:%S") ".png")))
+			 (start-process-shell-command
+			  "import" nil (concat "import -window root " path))
+			 (message (concat "Screenshot saved to " path)))
+		       ))
 	  
           ;; Launch applications via shell command
           ([?\s-&] . (lambda (command)
@@ -138,7 +153,12 @@
   
   (exwm-enable))
 
-;; (use-package 'counsel
-;;   :custom
-;;   (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only))
+;; Set frame transparency
+(set-frame-parameter (selected-frame) 'alpha '(87 . 87))
+(add-to-list 'default-frame-alist '(alpha . (87 . 87)))
+(set-frame-parameter (selected-frame) 'fullscreen 'maximized)
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
+(use-package counsel
+  :custom
+  (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only))
